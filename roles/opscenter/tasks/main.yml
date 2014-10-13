@@ -1,0 +1,11 @@
+- name: add the debian package for ops center
+  apt_repository: repo='deb http://debian.datastax.com/community stable main' state=present
+
+- name: add the key for the ops center repository
+  apt_key: url=http://debian.datastax.com/debian/repo_key state=present
+
+- name: install ops center
+  apt: name=opscenter state=present update_cache=yes
+
+- name: start opscenter
+  service: name=opscenterd state=started
