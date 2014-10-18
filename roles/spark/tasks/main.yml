@@ -1,5 +1,11 @@
 - name: download spark
-  get_url: url=http://d3kbcqa49mib13.cloudfront.net/spark-1.0.2-bin-hadoop2.tgz dest=/opt/ force=no
+  get_url: url=http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz dest=/opt/ force=no
 
 - name: unzip spark
-  unarchive: copy=no src=/opt/spark-1.0.2-bin-hadoop2.tgz  dest=/opt creates=/opt/spark-1.0.2-bin-hadoop2/
+  unarchive: copy=no src=/opt/{{ spark_version }}.tgz  dest=/opt creates=/opt/{{ spark_version }}/
+
+- name: give ownership to vagrant
+  file: path=/opt/{{ spark_version }}/ owner=vagrant group=vagrant recurse=yes
+
+- name: copy over spark env file
+  template: src=spark-env.sh dest=/opt/{{ spark_version }}/conf/
