@@ -7,5 +7,16 @@
 - name: give ownership to vagrant
   file: path=/opt/{{ spark_version }}/ owner=vagrant group=vagrant recurse=yes
 
+  # todo: work and logs folders
+
 - name: copy over spark env file
   template: src=spark-env.sh dest=/opt/{{ spark_version }}/conf/
+
+- name: copy over spark properties file for the shell
+  template: src=spark-defaults.conf dest=/opt/{{ spark_version }}/conf/
+
+- name: get spark on the path
+  lineinfile: dest=/home/vagrant/.bashrc line="export PATH=$PATH:/opt/{{ spark_version }}/bin:/opt/{{ spark_version }}/sbin"
+
+- name: alias spark shell to add the driver to jars
+  lineinfile: dest=/home/vagrant/.bashrc  line='alias spark-shell="spark-shell --jars /vagrant/spark-connector-1.0.2-driver-2.0.4-1.0.0-SNAPSHOT-fat.jar"'

@@ -18,3 +18,7 @@
 
 - name: make sure cassandra is started
   service: name=cassandra state=restarted
+
+- name: alias spark shell to add the driver to jars
+  lineinfile: dest=/home/vagrant/.bashrc  line='alias cqlsh="cqlsh {{ vagrant_ip }}"'
+
