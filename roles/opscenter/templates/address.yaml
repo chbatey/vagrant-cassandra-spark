@@ -1,0 +1,1 @@
+stomp_interface: {{ vagrant_ip }}

@@ -9,3 +9,12 @@
 
 - name: start opscenter
   service: name=opscenterd state=started
+ 
+- name: install opscenter datastax agent
+  apt: name=datastax-agent state=present
+
+- name: copy over the config file
+  template: src=address.yaml dest=/var/lib/datastax-agent/conf/
+
+- name: start
+  service: name=datastax-agent state=started
