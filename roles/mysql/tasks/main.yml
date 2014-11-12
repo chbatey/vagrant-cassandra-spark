@@ -1,2 +1,5 @@
 - name: adding mysql
   apt: name=mysql-server-5.6 state=present
+
+- name: add mysql password
+  command: mysqladmin -u root -h localhost password 'password'

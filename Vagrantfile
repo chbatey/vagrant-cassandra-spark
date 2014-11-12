@@ -11,9 +11,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "playbook.yml"
+    ansible.tags = "mysql"
   end
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "3048"]
+    vb.customize ["modifyvm", :id, "--memory", "4048"]
   end
 end
