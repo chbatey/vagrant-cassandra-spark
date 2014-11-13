@@ -2,21 +2,27 @@
   get_url: url=http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz dest=/opt/ force=no
 
 - name: unzip spark
-  unarchive: copy=no src=/opt/{{ spark_version }}.tgz  dest=/opt creates=/opt/{{ spark_version }}/
+  unarchive: copy=no src=/opt/{{ spark_version }}.tgz  dest=/opt creates={{ spark_install_location }}
 
 - name: give ownership to vagrant
-  file: path=/opt/{{ spark_version }}/ owner=vagrant group=vagrant recurse=yes
+  file: path={{ spark_install_location }} owner=vagrant group=vagrant recurse=yes
+
+- name: create logs directory
+  file: path={{ spark_install_location }}logs state=directory owner=vagrant group=vagrant
+
+- name: create logs directory
+  file: path={{ spark_install_location }}work state=directory owner=vagrant group=vagrant
 
   # todo: work and logs folders
 
 - name: copy over spark env file
-  template: src=spark-env.sh dest=/opt/{{ spark_version }}/conf/
+  template: src=spark-env.sh dest={{ spark_install_location }}/conf/
 
 - name: copy over spark properties file for the shell
-  template: src=spark-defaults.conf dest=/opt/{{ spark_version }}/conf/
+  template: src=spark-defaults.conf dest={{ spark_install_location }}/conf/
 
 - name: get spark on the path
-  lineinfile: dest=/home/vagrant/.bashrc line="export PATH=$PATH:/opt/{{ spark_version }}/bin:/opt/{{ spark_version }}/sbin"
+  lineinfile: dest=/home/vagrant/.bashrc line="export PATH=$PATH:{{ spark_install_location }}bin:{{ spark_install_location }}sbin"
 
 - name: alias spark shell to add the driver to jars
   lineinfile: dest=/home/vagrant/.bashrc  line='alias spark-shell="spark-shell --jars /vagrant/spark-connector-1.0.2-driver-2.0.4-1.0.0-SNAPSHOT-fat.jar"'
