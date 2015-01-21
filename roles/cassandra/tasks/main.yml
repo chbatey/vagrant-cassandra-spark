@@ -2,7 +2,7 @@
   apt: name=openjdk-7-jre state=present update_cache=yes
 
 - name: add cassandra debian repository
-  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian 20x main' state=present
+  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian 21x main' state=present
 
 - name: add the key for the cassandra debian repo
   apt_key: keyserver=pgp.mit.edu id=F758CE318D77295D
@@ -11,7 +11,7 @@
   apt_key: keyserver=pgp.mit.edu id=2B5C1B00
 
 - name: install cassandra
-  apt: name=cassandra state=present update_cache=yes
+  apt: name=cassandra state=present update_cache=yes force=yes
 
 - name: override cassandra.yaml file
   template: src=cassandra.yaml dest=/etc/cassandra/

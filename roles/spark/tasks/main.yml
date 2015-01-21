@@ -25,4 +25,4 @@
   lineinfile: dest=/home/vagrant/.bashrc line="export PATH=$PATH:{{ spark_install_location }}bin:{{ spark_install_location }}sbin"
 
 - name: alias spark shell to add the driver to jars
-  lineinfile: dest=/home/vagrant/.bashrc  line='alias spark-shell="spark-shell --jars /vagrant/spark-connector-1.0.2-driver-2.0.4-1.0.0-SNAPSHOT-fat.jar"'
+  lineinfile: dest=/home/vagrant/.bashrc  line='alias spark-shell="spark-shell --jars /vagrant/{{ connector_jar }}"'
