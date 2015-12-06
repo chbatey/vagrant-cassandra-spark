@@ -5,8 +5,8 @@
     cluster_name: Test Cluster
     vagrant_ip: 192.168.10.11
     seeds: 192.168.10.11
-    spark_version: spark-1.2.0-bin-hadoop2.4
-    connector_jar: spark-connector-1.2.0-alpha1-driver-2.1.4-1.0.0-SNAPSHOT-fat.jar
+    spark_version: spark-1.4.1-bin-hadoop2.4
+    connector_jar: spark-connector-1.4.1-driver-2.1.8-1.0.0-SNAPSHOT-fat.jar
 
   tasks:
   - name: install htop
