@@ -1,7 +1,7 @@
 vagrant-cassandra-spark
 =======================
 
-A work in progress.
+A work in progress. (http://christopher-batey.blogspot.com/2014/12/getting-started-cassandra-spark-with.html) / (http://batey.info/spark-cassandra-basics-connecting-to.html)
 
 Installs:
 * Cassandra
